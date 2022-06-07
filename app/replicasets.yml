@@ -1,0 +1,7 @@
+server:
+  instances:
+  - server-main
+  - server-rv
+  roles:
+  - app.roles.server
+  all_rw: false

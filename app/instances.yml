@@ -1,0 +1,8 @@
+---
+app.server-main:
+  advertise_uri: localhost:3301
+  http_port: 8081
+
+app.server-rv:
+  advertise_uri: localhost:3302
+  http_port: 8082
