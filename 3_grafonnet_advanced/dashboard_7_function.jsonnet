@@ -24,7 +24,7 @@ local myGraphPanel(
 );
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My functional dashboard',
     editable=true,
     schemaVersion=21,
     time_from='now-30m'

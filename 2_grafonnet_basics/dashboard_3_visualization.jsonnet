@@ -1,7 +1,7 @@
 local grafana = import 'grafonnet/grafana.libsonnet';
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My beautiful dashboard',
     editable=true,
     schemaVersion=21,
 ).addPanel(

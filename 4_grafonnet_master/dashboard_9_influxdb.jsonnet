@@ -3,7 +3,7 @@ local panels = import 'dashboard_9_panels.libsonnet';
 local positions = import 'dashboard_9_positions.libsonnet';
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My clever InfluxDB dashboard',
     editable=true,
     schemaVersion=21,
     time_from='now-30m'

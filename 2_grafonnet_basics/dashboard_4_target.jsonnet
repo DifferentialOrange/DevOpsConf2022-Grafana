@@ -1,7 +1,7 @@
 local grafana = import 'grafonnet/grafana.libsonnet';
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My dashboard with target',
     editable=true,
     schemaVersion=21,
     time_from='now-30m'

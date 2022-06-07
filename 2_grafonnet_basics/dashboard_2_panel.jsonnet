@@ -1,7 +1,7 @@
 local grafana = import 'grafonnet/grafana.libsonnet';
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My dashboard with panel',
     # разрешить пользователю делать изменения в Grafana
     editable=true,
     # избавляет от проблем при импорте в Grafana различных версий

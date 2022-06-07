@@ -2,7 +2,7 @@ local grafana = import 'grafonnet/grafana.libsonnet';
 local panels = import 'dashboard_8_panels.libsonnet';
 
 grafana.dashboard.new(
-    title='My dashboard',
+    title='My Prometheus dashboard',
     editable=true,
     schemaVersion=21,
     time_from='now-30m'
