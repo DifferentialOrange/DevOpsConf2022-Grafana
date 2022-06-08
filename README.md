@@ -134,20 +134,3 @@ jsonnet -J ./vendor ./4_grafonnet_master/dashboard_8_prometheus.jsonnet -o dashb
 ```bash
 jsonnet -J ./vendor ./4_grafonnet_master/dashboard_8_influxdb.jsonnet -o dashboard.json
 ```
-
-Чтобы сгенерировать дашборд для Prometheus с автоматической
-расстановкой панелей, исполните следующую команду.
-Параметр импорта Prometheus: `Prometheus`, параметр импорта job: `tarantool_app`
-параметр импорта rate time range: `2m`. 
-
-```bash
-jsonnet -J ./vendor ./4_grafonnet_master/dashboard_9_prometheus.jsonnet -o dashboard.json
-```
-
-Чтобы сгенерировать дашборд для InfluxDB с автоматической
-расстановкой панелей, исполните следующую команду.
-Параметр импорта InfluxDB: `influxdb`, параметр импорта measurement: `tarantool_app_http`.
-
-```bash
-jsonnet -J ./vendor ./4_grafonnet_master/dashboard_9_influxdb.jsonnet -o dashboard.json
-```
