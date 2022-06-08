@@ -20,10 +20,10 @@ docker-compose up -d
 
 # 1. Основы jsonnet
 
-Для установки `jsonnet` необходим `go`.
+Для установки `jsonnet` необходим `go` или `brew`.
 
 ```bash
-go get github.com/google/go-jsonnet/cmd/jsonnet
+go install github.com/google/go-jsonnet/cmd/jsonnet@latest
 ```
 
 Чтобы сгенерировать json, исполните следующую команду.
@@ -61,10 +61,13 @@ jsonnet ./1_jsonnet_basics/script_4.jsonnet
 
 # 2. Основы grafonnet
 
-Для установки `jb` (jsonnet bundler) необходим `go`.
+Для установки `jb` (jsonnet bundler) необходим `go` или `brew`.
 
 ```bash
-go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
+```
+```bash
+brew install jsonnet-bundler
 ```
 
 Для установки зависимостей исполните следующую команду.
