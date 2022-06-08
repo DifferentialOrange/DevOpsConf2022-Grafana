@@ -1,5 +1,5 @@
 local grafana = import 'grafonnet/grafana.libsonnet';
-local panels = import 'dashboard_8_panels.libsonnet';
+local panels = import 'panels.libsonnet';
 
 grafana.dashboard.new(
     title='My InfluxDB dashboard',
