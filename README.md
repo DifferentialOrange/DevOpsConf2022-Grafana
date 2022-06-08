@@ -2,8 +2,15 @@
 
 Для запуска необходим `docker-compose`.
 
+Чтобы подготовить кластер, запустите
 ```bash
-docker-compose up --build -d
+docker-compose build
+docker-compose pull
+```
+
+Чтобы запустить кластер, исполните команду
+```bash
+docker-compose up -d
 ```
 
 Проект представляет собой простое приложение на Tarantool c метриками,
