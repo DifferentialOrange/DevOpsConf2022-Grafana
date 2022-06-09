@@ -1,56 +1,41 @@
 #!/usr/bin/env tarantool
 
-require('strict').on()
+local metrics = require('metrics')
+local prometheus = require('metrics.plugins.prometheus')
+local json_metrics = require('metrics.plugins.json')
 
--- configure path so that you can run application
--- from outside the root directory
-if package.setsearchroot ~= nil then
-    package.setsearchroot()
-else
-    -- Workaround for rocks loading in tarantool 1.10
-    -- It can be removed in tarantool > 2.2
-    -- By default, when you do require('mymodule'), tarantool looks into
-    -- the current working directory and whatever is specified in
-    -- package.path and package.cpath. If you run your app while in the
-    -- root directory of that app, everything goes fine, but if you try to
-    -- start your app with "tarantool myapp/init.lua", it will fail to load
-    -- its modules, and modules from myapp/.rocks.
-    local fio = require('fio')
-    local app_dir = fio.abspath(fio.dirname(arg[0]))
-    package.path = app_dir .. '/?.lua;' .. package.path
-    package.path = app_dir .. '/?/init.lua;' .. package.path
-    package.path = app_dir .. '/.rocks/share/tarantool/?.lua;' .. package.path
-    package.path = app_dir .. '/.rocks/share/tarantool/?/init.lua;' .. package.path
-    package.cpath = app_dir .. '/?.so;' .. package.cpath
-    package.cpath = app_dir .. '/?.dylib;' .. package.cpath
-    package.cpath = app_dir .. '/.rocks/lib/tarantool/?.so;' .. package.cpath
-    package.cpath = app_dir .. '/.rocks/lib/tarantool/?.dylib;' .. package.cpath
-end
+local host_port = os.getenv("PORT") or 8081
+local httpd = require('http.server').new(nil, host_port)
 
--- configure cartridge
+metrics.register_callback(function()
+    math.randomseed(os.time())
 
-local cartridge = require('cartridge')
+    local server_pending_requests = metrics.gauge('server_pending_requests')
+    local server_requests_process = metrics.summary(
+        'server_requests_process', nil,
+        { [0.5] = 1e-6, [0.9] = 1e-6, [0.99] = 1e-6 },
+        { max_age_time = 60, age_buckets_count = 5 }
+    )
 
-local ok, err = cartridge.cfg({
-    roles = {
-        'cartridge.roles.metrics',
-        'app.roles.server',
-    },
-    cluster_cookie = 'app-cluster-cookie',
-})
+    -- Imitate master server.
+    server_pending_requests:set(math.random(0, 1) * math.random(1, 10), {alias = 'server-main'})
+    for _ = 1, math.random(100, 1000) do
+        server_requests_process:observe(math.random(100, 1000) * 1e-5, {alias = 'server-main'})
+    end
 
-assert(ok, tostring(err))
+    -- Imitate replica server.
+    server_pending_requests:set(math.random(0, 2), {alias = 'server-rv'})
+    for _ = 1, math.random(10, 50) do
+        server_requests_process:observe(math.random(100, 1000) * 1e-5, {alias = 'server-rv'})
+    end
+end)
 
-
-local metrics = require('cartridge.roles.metrics')
-metrics.set_export({
-   {
-       path = '/metrics/json',
-       format = 'json'
-   },
-   {
-       path = '/metrics/prometheus',
-       format = 'prometheus'
-   },
-})
-
+httpd:route( { path = '/metrics/prometheus' }, prometheus.collect_http)
+httpd:route( { path = '/metrics/json' },
+    function(req)
+        return req:render({
+            text = json_metrics.export()
+        })
+    end
+)
+httpd:start()

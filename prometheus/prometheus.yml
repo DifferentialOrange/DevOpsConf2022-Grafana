@@ -31,5 +31,4 @@ scrape_configs:
     static_configs:
       - targets: 
         - "app:8081"
-        - "app:8082"
     metrics_path: "/metrics/prometheus"
