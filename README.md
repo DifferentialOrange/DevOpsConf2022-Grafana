@@ -5,8 +5,7 @@
 Чтобы подготовить кластер, запустите следующие команды.
 
 ```bash
-docker-compose build
-docker-compose pull
+docker-compose build --no-cache && docker-compose pull
 ```
 
 # Основы jsonnet
