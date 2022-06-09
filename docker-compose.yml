@@ -17,7 +17,7 @@ services:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   influxdb:
-    image: influxdb:1.7-alpine
+    image: influxdb:1.8.10
     environment: 
       INFLUXDB_REPORTING_DISABLED: "true"
       INFLUXDB_DB: "metrics"
@@ -32,7 +32,7 @@ services:
       - 8086:8086
 
   prometheus:
-    image: prom/prometheus:v2.17.2
+    image: prom/prometheus:v2.36.0
     networks:
       tarantool_app_dev:
     ports:
