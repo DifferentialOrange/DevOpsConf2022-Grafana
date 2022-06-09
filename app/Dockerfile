@@ -1,4 +1,4 @@
-FROM tarantool/tarantool:2.x-centos7
+FROM tarantool/tarantool:2.10.0-centos7
 
 WORKDIR /app
 
