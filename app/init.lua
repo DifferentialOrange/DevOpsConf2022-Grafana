@@ -1,5 +1,6 @@
 #!/usr/bin/env tarantool
 
+local clock = require('clock')
 local metrics = require('metrics')
 local prometheus = require('metrics.plugins.prometheus')
 local json_metrics = require('metrics.plugins.json')
@@ -7,7 +8,7 @@ local json_metrics = require('metrics.plugins.json')
 local httpd = require('http.server').new(nil, 8081)
 
 metrics.register_callback(function()
-    math.randomseed(os.time())
+    math.randomseed(clock.monotonic())
 
     local server_pending_requests = metrics.gauge('server_pending_requests')
     local server_requests_process = metrics.summary(
