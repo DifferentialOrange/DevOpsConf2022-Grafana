@@ -4,8 +4,7 @@ local metrics = require('metrics')
 local prometheus = require('metrics.plugins.prometheus')
 local json_metrics = require('metrics.plugins.json')
 
-local host_port = os.getenv("PORT") or 8081
-local httpd = require('http.server').new(nil, host_port)
+local httpd = require('http.server').new(nil, 8081)
 
 metrics.register_callback(function()
     math.randomseed(os.time())
