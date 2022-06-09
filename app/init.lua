@@ -13,7 +13,7 @@ metrics.register_callback(function()
     local server_pending_requests = metrics.gauge('server_pending_requests')
     local server_requests_process = metrics.summary(
         'server_requests_process', nil,
-        { [0.5] = 1e-6, [0.9] = 1e-6, [0.99] = 1e-6 },
+        { [0.5] = 1e-3, [0.9] = 1e-3, [0.99] = 1e-3 },
         { max_age_time = 60, age_buckets_count = 5 }
     )
 
