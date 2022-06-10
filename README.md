@@ -120,7 +120,7 @@ jsonnet -J ./vendor ./grafonnet/5/dashboard.jsonnet -o dashboard.json
 
 Параметры импорта
 - `Prometheus`: `Prometheus`
-- `job`: `tarantool_app`
+- `job`: `app`
 
 ## 6. Две панели
 
@@ -133,7 +133,7 @@ jsonnet -J ./vendor ./grafonnet/6/dashboard.jsonnet -o dashboard.json
 
 Параметры импорта
 - `Prometheus`: `Prometheus`
-- `job`: `tarantool_app`
+- `job`: `app`
 - `rate_time_range`: `2m`
 
 ## 7. Функция для создания панели
@@ -147,7 +147,7 @@ jsonnet -J ./vendor ./grafonnet/7/dashboard.jsonnet -o dashboard.json
 
 Параметры импорта
 - `Prometheus`: `Prometheus`
-- `job`: `tarantool_app`
+- `job`: `app`
 - `rate_time_range`: `2m`
 
 ## 8. Поддержка разных источников
@@ -160,7 +160,7 @@ jsonnet -J ./vendor ./grafonnet/8/dashboard_prometheus.jsonnet -o dashboard.json
 
 Параметры импорта
 - `Prometheus`: `Prometheus`
-- `job`: `tarantool_app`
+- `job`: `app`
 - `rate_time_range`: `2m`
 
 Чтобы сгенерировать дашборд для InfluxDB, исполните следующую команду.
@@ -171,4 +171,4 @@ jsonnet -J ./vendor ./grafonnet/8/dashboard_influxdb.jsonnet -o dashboard.json
 
 Параметры импорта
 - `InfluxDB`: `influxdb`
-- `measurement`: `tarantool_app_http`
+- `measurement`: `app_http`

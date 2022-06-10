@@ -5,14 +5,14 @@ services:
       context: ./app
       dockerfile: Dockerfile
     networks:
-      tarantool_app_dev:
+      app_dev:
     ports:
       - 8081:8081
 
   telegraf:
     image: telegraf:1.22.4
     networks:
-      tarantool_app_dev:
+      app_dev:
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
@@ -27,14 +27,14 @@ services:
       INFLUXDB_USER_PASSWORD: "telegraf"
       INFLUXDB_HTTP_AUTH_ENABLED: "true"
     networks:
-      tarantool_app_dev:
+      app_dev:
     ports:
       - 8086:8086
 
   prometheus:
     image: prom/prometheus:v2.36.0
     networks:
-      tarantool_app_dev:
+      app_dev:
     ports:
       - 9090:9090
     volumes:
@@ -49,12 +49,12 @@ services:
       GF_AUTH_DISABLE_SIGNOUT_MENU: "true"
       GF_AUTH_DISABLE_LOGIN_FORM: "true"
     networks:
-      tarantool_app_dev:
+      app_dev:
     ports:
       - 3000:3000
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
 
 networks:
-  tarantool_app_dev:
+  app_dev:
     driver: bridge
