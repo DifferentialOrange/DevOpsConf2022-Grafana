@@ -31,6 +31,12 @@ echo export PATH="$(go env GOPATH)/bin:$PATH" >>$HOME/.profile
 source $HOME/.profile
 ```
 
+Убедитесь, что `jsonnet` установлен и функционирует.
+
+```bash
+jsonnet --version
+```
+
 Чтобы сгенерировать json, исполните следующую команду.
 
 ```bash
@@ -67,6 +73,12 @@ go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
 
 ```bash
 brew install jsonnet-bundler
+```
+
+Убедитесь, что `jb` установлен и функционирует.
+
+```bash
+jb --version
 ```
 
 Для установки зависимостей исполните следующую команду.
