@@ -1,12 +1,8 @@
-FROM tarantool/tarantool:2.10.0-centos7
+FROM python:3.9
 
-RUN yum install -y git \
-                   cmake \
-                   make \
-                   gcc \
-                   gcc-c++
 COPY . .
+RUN pip3 install --upgrade pip -r requirements.txt
 
-RUN tarantoolctl rocks make app-scm-1.rockspec
+ENV FLASK_APP='app'
 
-CMD ["tarantool", "./init.lua"]
+CMD flask run --host 0.0.0.0 --port 8081
