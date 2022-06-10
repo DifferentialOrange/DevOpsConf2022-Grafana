@@ -10,13 +10,25 @@ docker-compose build --no-cache && docker-compose pull
 
 # Основы jsonnet
 
-Для установки `jsonnet` необходим `go` или `brew`.
+Для установки `jsonnet` необходим `go` (Linux) или `brew` (Mac).
 
 ```bash
 go install github.com/google/go-jsonnet/cmd/jsonnet@latest
 ```
+
 ```bash
 brew install jsonnet
+```
+
+Исполняемые файлы, установленные go, доступны по следующему пути.
+```bash
+$(go env GOPATH)/bin
+```
+
+Чтобы добавить их в общий PATH, воспользуйтесь следующей командой.
+```bash
+echo export PATH="$(go env GOPATH)/bin:$PATH" >>$HOME/.profile
+source $HOME/.profile
 ```
 
 Чтобы сгенерировать json, исполните следующую команду.
@@ -47,11 +59,12 @@ jsonnet ./jsonnet/script_4.jsonnet
 
 # Основы grafonnet
 
-Для установки `jb` (jsonnet bundler) необходим `go` или `brew`.
+Для установки `jb` (jsonnet bundler) необходим `go` (Linux) или `brew` (Mac).
 
 ```bash
 go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
 ```
+
 ```bash
 brew install jsonnet-bundler
 ```
